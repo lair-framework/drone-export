@@ -69,8 +69,11 @@ func main() {
 	}
 	project, err := c.ExportProject(lairPID)
 	if err != nil {
-		log.Fatalf("Fatal: Unable to import project. Error %s", err)
+		log.Fatalf("Fatal: Unable to import project. Error %s", err.Error())
 	}
-	data, _ := json.Marshal(project)
+	data, err := json.Marshal(project)
+	if err != nil {
+		log.Fatalf("Fatal: Unable to parse JSON. Error %s", err.Error())
+	}
 	fmt.Println(string(data))
 }
